@@ -28,7 +28,7 @@ public class Booking extends javax.swing.JFrame {
     public Booking() {
         this.buttonGroup1 = new ButtonGroup();
         initComponents();
-        String dataConn = "jdbc:mysql://localhost/final final";
+        String dataConn = "jdbc:mysql://localhost/teamhatdog";
         String username= "root";
         String password= "";
         try{

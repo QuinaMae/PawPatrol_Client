@@ -24,7 +24,7 @@ public class EditApp extends javax.swing.JFrame {
  
     public EditApp() {
         initComponents();
-        String dataConn = "jdbc:mysql://localhost/final final";
+        String dataConn = "jdbc:mysql://localhost/teamhatdog";
         String username= "root";
         String password= "";
         try{

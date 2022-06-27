@@ -24,7 +24,7 @@ public class SchedandServs extends javax.swing.JFrame {
  
     public SchedandServs() {
         initComponents();
-        String dataConn = "jdbc:mysql://localhost/final final";
+        String dataConn = "jdbc:mysql://localhost/teamhatdog";
         String username= "root";
         String password= "";
         try{

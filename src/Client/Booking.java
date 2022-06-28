@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
@@ -21,9 +24,15 @@ public class Booking extends javax.swing.JFrame {
     private String gender;
     private String specie;
     private String serv;
-    Connection con;
+    
     int total=0;
     
+    String dataConn = "jdbc:mysql://localhost/teamhatdog";
+    String username= "root";
+    String password= "";
+    Connection con;
+    PreparedStatement ps;
+    ResultSet rs;
     
     public Booking() {
         this.buttonGroup1 = new ButtonGroup();
@@ -75,15 +84,11 @@ public class Booking extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         totalTf = new javax.swing.JTextField();
-        maleRb = new javax.swing.JRadioButton();
-        femaleRb = new javax.swing.JRadioButton();
-        catRb = new javax.swing.JRadioButton();
-        dogRb = new javax.swing.JRadioButton();
-        jRadioButtonsit = new javax.swing.JRadioButton();
-        jRadioButtonwalk = new javax.swing.JRadioButton();
-        jRadioButtongroom = new javax.swing.JRadioButton();
-        jRadioButtontrain = new javax.swing.JRadioButton();
-        jRadioButton1hotel = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        userID = new javax.swing.JTextField();
+        genderCb = new javax.swing.JComboBox<>();
+        SpecieCb = new javax.swing.JComboBox<>();
+        servCb = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,6 +131,11 @@ public class Booking extends javax.swing.JFrame {
         appointmentsLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
         appointmentsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         appointmentsLabel.setText("My Appointments");
+        appointmentsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                appointmentsLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
@@ -184,7 +194,7 @@ public class Booking extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Name");
+        jLabel2.setText("Pet's Name");
 
         jLabel3.setText("Age");
 
@@ -203,77 +213,20 @@ public class Booking extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(maleRb);
-        maleRb.setText("male");
-        maleRb.addActionListener(new java.awt.event.ActionListener() {
+        jLabel7.setText("username");
+
+        userID.setEditable(false);
+        userID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maleRbActionPerformed(evt);
+                userIDActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(femaleRb);
-        femaleRb.setText("female");
-        femaleRb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                femaleRbActionPerformed(evt);
-            }
-        });
+        genderCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Female", "Male" }));
 
-        buttonGroup2.add(catRb);
-        catRb.setText("cat");
-        catRb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                catRbActionPerformed(evt);
-            }
-        });
+        SpecieCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cat", "Dog" }));
 
-        buttonGroup2.add(dogRb);
-        dogRb.setText("dog");
-        dogRb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dogRbActionPerformed(evt);
-            }
-        });
-
-        buttonGroup3.add(jRadioButtonsit);
-        jRadioButtonsit.setText("Pet Sitting 1000 ");
-        jRadioButtonsit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonsitActionPerformed(evt);
-            }
-        });
-
-        buttonGroup3.add(jRadioButtonwalk);
-        jRadioButtonwalk.setText("Pet Walking 500");
-        jRadioButtonwalk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonwalkActionPerformed(evt);
-            }
-        });
-
-        buttonGroup3.add(jRadioButtongroom);
-        jRadioButtongroom.setText("Pet Groom 700");
-        jRadioButtongroom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtongroomActionPerformed(evt);
-            }
-        });
-
-        buttonGroup3.add(jRadioButtontrain);
-        jRadioButtontrain.setText("Pet Training 2500");
-        jRadioButtontrain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtontrainActionPerformed(evt);
-            }
-        });
-
-        buttonGroup3.add(jRadioButton1hotel);
-        jRadioButton1hotel.setText("Pet Hotel 2000");
-        jRadioButton1hotel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1hotelActionPerformed(evt);
-            }
-        });
+        servCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pet Sitting", "Pet Walking", "Pet Grooming", "Pet Training", "Pet Hotel" }));
 
         javax.swing.GroupLayout schedPanelLayout = new javax.swing.GroupLayout(schedPanel);
         schedPanel.setLayout(schedPanelLayout);
@@ -282,59 +235,56 @@ public class Booking extends javax.swing.JFrame {
             .addGroup(schedPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(schedPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
                         .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(servLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButtonsit))
-                        .addGap(207, 207, 207)
+                            .addComponent(dateCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(billLabel)
-                            .addComponent(totalTf, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(schedPanelLayout.createSequentialGroup()
-                        .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
-                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dateCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dateLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(timeCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(schedPanelLayout.createSequentialGroup()
-                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(petNameTf, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(petAgeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
-                                    .addGroup(schedPanelLayout.createSequentialGroup()
-                                        .addComponent(catRb)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(dogRb))))
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel1)
+                            .addComponent(timeCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(submitBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(appLabel)
-                        .addGap(154, 154, 154))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
-                        .addComponent(jRadioButton1hotel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(submitBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63))
+                        .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
+                                .addComponent(appLabel)
+                                .addGap(154, 154, 154))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29))))
                     .addGroup(schedPanelLayout.createSequentialGroup()
                         .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButtontrain)
-                            .addComponent(jRadioButtongroom)
-                            .addComponent(jRadioButtonwalk)
                             .addGroup(schedPanelLayout.createSequentialGroup()
-                                .addComponent(maleRb)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(femaleRb)))
+                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(servLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(servCb, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(207, 207, 207)
+                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(billLabel)
+                                    .addComponent(totalTf, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(schedPanelLayout.createSequentialGroup()
+                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(petNameTf, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel5))
+                                .addGap(18, 18, 18)
+                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel3)
+                                    .addComponent(petAgeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(SpecieCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(schedPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(genderCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         schedPanelLayout.setVerticalGroup(
@@ -344,57 +294,47 @@ public class Booking extends javax.swing.JFrame {
                     .addGroup(schedPanelLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(schedPanelLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabel3)))
+                        .addGap(13, 13, 13)
+                        .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(petNameTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(petAgeTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(petAgeTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(schedPanelLayout.createSequentialGroup()
+                        .addComponent(appLabel)
+                        .addGap(7, 7, 7)
                         .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(maleRb)
-                            .addComponent(femaleRb)
-                            .addComponent(catRb)
-                            .addComponent(dogRb))
-                        .addGap(20, 20, 20)
-                        .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(dateLabel)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(dateCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(timeCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(appLabel))
+                            .addComponent(jLabel7)
+                            .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(genderCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SpecieCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateLabel)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timeCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(billLabel)
                     .addComponent(servLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButtonsit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButtonwalk)
                 .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(schedPanelLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(submitBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(schedPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtongroom)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtontrain)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton1hotel)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addComponent(servCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(76, 76, 76)
+                .addComponent(submitBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -426,6 +366,9 @@ public class Booking extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    void username(String user){
+        userID.setText(user);
+    }
    
     private void schedNservicesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_schedNservicesLabelMouseClicked
         
@@ -434,53 +377,55 @@ public class Booking extends javax.swing.JFrame {
 
     private void bookingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingLabelMouseClicked
 
-        String action = "SELECT * FROM `shop_schedule` WHERE `shop_schedule`.`status` = \"available\"";
-        try{
-             PreparedStatement pst = con.prepareStatement(action);
-             ResultSet rs =pst.executeQuery();
-             while(rs.next()){
-                 String date = rs.getString("date");
-                 dateCbBox.addItem(date);
-                
-             }
-        }catch(Exception e){
-        }
-        String action1 = "SELECT * FROM `shop_schedule` WHERE `shop_schedule`.`status` = \"available\"";
-        try{
-             PreparedStatement pst = con.prepareStatement(action1);
-             ResultSet rs =pst.executeQuery();
-             while(rs.next()){
-                 String date = rs.getString("time_in");
-                 timeCbBox.addItem(date);
-                
-             }
-        }catch(Exception e){
-        }
+//        String action = "SELECT * FROM `shop_schedule` WHERE `shop_schedule`.`status` = \"available\"";
+         try{
+
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection(dataConn, username, password);
+                ps = con.prepareStatement("SELECT * FROM `shop_schedule` WHERE `shop_schedule`.`status` = 'available'");
+                rs = ps.executeQuery();
+                 while(rs.next()){
+                     String date = rs.getString("date");
+                     dateCbBox.addItem(date);
+                   }       
+            }catch(Exception e){}
+        
+            String action1 = "SELECT * FROM `shop_schedule` WHERE `shop_schedule`.`status` = \"available\"";
+            try{
+                 PreparedStatement pst = con.prepareStatement(action1);
+                 ResultSet rs =pst.executeQuery();
+                 while(rs.next()){
+                     String date = rs.getString("time_in");
+                     timeCbBox.addItem(date);
+
+                 }
+            }catch(Exception e){
+            }
         
     }//GEN-LAST:event_bookingLabelMouseClicked
 
     private void submitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBTNActionPerformed
-        String sub = "INSERT INTO `appointments` (`pet_name`, `pet_gender`, `pet_specie`, `pet_age`, `service`, "
-                + "`amount`) VALUES ( ?, ?, ?, ?, ?, ?);";
-        try{
-        PreparedStatement pst = con.prepareStatement(sub);
-             
-       // String date = dateCbBox.getSelectedItem().toString();// gets item from dropdown
-       // String time = timeCbBox.getSelectedItem().toString();
-       
- 
-        pst.setString(1,petNameTf.getText()); // gets pet name
-        pst.setString(2,gender);// gets pet gender
-        pst.setString(3,specie); // gets specie
-        pst.setString(4,petAgeTf.getText()); // gets pet age
-        pst.setString(5, serv); // gets service
-        pst.setString(6,totalTf.getText());// sana gumana to heehee
-        //pst.setString(5,date);
-        //pst.setString(6,time);
-        
-        ResultSet rs =pst.executeQuery();
-        JOptionPane.showMessageDialog(this, "Successfully Added");
-        }catch(Exception e){
+        if (userID.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Missing Component!"); 
+            } else {
+            try{        
+                String sub = "INSERT INTO `appointments` (`username`, `pet_name`, `pet_specie`, `pet_age`, `pet_gender`, `service`, `date_booked`, `time_booked`, `status`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, 'pending');";
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection(dataConn, username, password);
+                PreparedStatement pst = con.prepareStatement(sub);
+
+                pst.setString(1,userID.getText());
+                pst.setString(2,petNameTf.getText()); // gets pet name
+                pst.setObject(3,SpecieCb.getSelectedItem()); // gets specie
+                pst.setString(4,petAgeTf.getText()); // gets pet age
+                pst.setObject(5,genderCb.getSelectedItem());// gets pet gender
+                pst.setObject(6, servCb.getSelectedItem()); // gets service
+                pst.setObject(7, dateCbBox.getSelectedItem()); // date
+                pst.setObject(8, timeCbBox.getSelectedItem()); // time
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Successfully Updated");
+            }catch(Exception e){
+            }
         }
     }//GEN-LAST:event_submitBTNActionPerformed
 
@@ -492,50 +437,28 @@ public class Booking extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_timeCbBoxActionPerformed
 
-    private void femaleRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femaleRbActionPerformed
-        gender = "female";
-    }//GEN-LAST:event_femaleRbActionPerformed
-
-    private void catRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catRbActionPerformed
-        specie = "cat";
-    }//GEN-LAST:event_catRbActionPerformed
-
-    private void maleRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleRbActionPerformed
-        gender = "male";
-    }//GEN-LAST:event_maleRbActionPerformed
-
-    private void dogRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dogRbActionPerformed
-        specie = "dog";
-    }//GEN-LAST:event_dogRbActionPerformed
-
-    private void jRadioButtonsitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonsitActionPerformed
-        serv= "Pet Sitting";
-        totalTf.setText("800");
-    }//GEN-LAST:event_jRadioButtonsitActionPerformed
-
-    private void jRadioButtonwalkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonwalkActionPerformed
-        serv = "Pet Walking";
-        totalTf.setText("400");
-    }//GEN-LAST:event_jRadioButtonwalkActionPerformed
-
-    private void jRadioButtongroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtongroomActionPerformed
-        serv = "Pet Groom";
-        totalTf.setText("800");
-    }//GEN-LAST:event_jRadioButtongroomActionPerformed
-
-    private void jRadioButtontrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtontrainActionPerformed
-        serv = "Pet Training";
-        totalTf.setText("1500");
-    }//GEN-LAST:event_jRadioButtontrainActionPerformed
-
     private void totalTfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalTfActionPerformed
         
     }//GEN-LAST:event_totalTfActionPerformed
 
-    private void jRadioButton1hotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1hotelActionPerformed
-        serv = "Pet Hotel";
-        totalTf.setText("2000");
-    }//GEN-LAST:event_jRadioButton1hotelActionPerformed
+    private void userIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userIDActionPerformed
+        try {
+            // TODO add your handling code here:
+           
+
+
+        } catch (Exception ex) {
+            Logger.getLogger(Booking.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_userIDActionPerformed
+
+    private void appointmentsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsLabelMouseClicked
+        // TODO add your handling code here:
+        dispose();
+        EditApp myapp = new EditApp();
+        myapp.setVisible(true);
+    }//GEN-LAST:event_appointmentsLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -576,6 +499,7 @@ public class Booking extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> SpecieCb;
     private javax.swing.JLabel appLabel;
     private javax.swing.JLabel appointmentsLabel;
     private javax.swing.JLabel billLabel;
@@ -585,34 +509,29 @@ public class Booking extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.ButtonGroup buttonGroup5;
-    private javax.swing.JRadioButton catRb;
     private javax.swing.JComboBox<String> dateCbBox;
     private javax.swing.JLabel dateLabel;
-    private javax.swing.JRadioButton dogRb;
-    private javax.swing.JRadioButton femaleRb;
+    private javax.swing.JComboBox<String> genderCb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JRadioButton jRadioButton1hotel;
-    private javax.swing.JRadioButton jRadioButtongroom;
-    private javax.swing.JRadioButton jRadioButtonsit;
-    private javax.swing.JRadioButton jRadioButtontrain;
-    private javax.swing.JRadioButton jRadioButtonwalk;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JRadioButton maleRb;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel pawPatLabel;
     private javax.swing.JTextField petAgeTf;
     private javax.swing.JTextField petNameTf;
     private javax.swing.JLabel schedNservicesLabel;
     private javax.swing.JPanel schedPanel;
+    private javax.swing.JComboBox<String> servCb;
     private javax.swing.JLabel servLabel;
     private javax.swing.JButton submitBTN;
     private javax.swing.JComboBox<String> timeCbBox;
     private javax.swing.JTextField totalTf;
+    private javax.swing.JTextField userID;
     // End of variables declaration//GEN-END:variables
 }

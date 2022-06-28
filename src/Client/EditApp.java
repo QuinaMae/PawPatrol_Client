@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class EditApp extends javax.swing.JFrame {
 
     Connection con;
-    
+    Login uname = new Login();
  
     public EditApp() {
         initComponents();
@@ -31,6 +31,10 @@ public class EditApp extends javax.swing.JFrame {
             con= DriverManager.getConnection(dataConn,username,password);
         }catch(Exception e){
         }
+    }
+    
+    void username(String user){
+        userID.setText(user);
     }
  
     /**
@@ -44,6 +48,8 @@ public class EditApp extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         pawPatLabel = new javax.swing.JLabel();
         menuPanel = new javax.swing.JPanel();
         schedNservicesLabel = new javax.swing.JLabel();
@@ -52,8 +58,17 @@ public class EditApp extends javax.swing.JFrame {
         schedPanel = new javax.swing.JPanel();
         editAppLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        acceptedTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        pendingTable = new javax.swing.JTable();
+        refreshBtn1 = new javax.swing.JButton();
+        refreshBtn2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        userID = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -67,6 +82,13 @@ public class EditApp extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(jList1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,20 +149,17 @@ public class EditApp extends javax.swing.JFrame {
         editAppLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         editAppLabel.setText("Edit Appointment ");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        acceptedTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "id", "pet_name", "pet_gender", "pet_specie", "pet_age", "service", "date_booked", "time_booked"
             }
         ));
-        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jScrollPane2.setViewportView(jTable2);
-        jTable2.getAccessibleContext().setAccessibleParent(jTable2);
+        acceptedTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane2.setViewportView(acceptedTable);
+        acceptedTable.getAccessibleContext().setAccessibleParent(acceptedTable);
 
         jButton1.setText("delete");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -149,35 +168,115 @@ public class EditApp extends javax.swing.JFrame {
             }
         });
 
+        cancelBtn.setText("request cancellation");
+
+        pendingTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id", "pet_name", "pet_gender", "pet_specie", "pet_age", "service", "date_booked", "time_booked"
+            }
+        ));
+        pendingTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane3.setViewportView(pendingTable);
+
+        refreshBtn1.setText("refresh");
+        refreshBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBtn1ActionPerformed(evt);
+            }
+        });
+
+        refreshBtn2.setText("refresh");
+        refreshBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBtn2ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Accepted Appointments");
+
+        jLabel2.setText("Pending Appointments");
+
+        jLabel3.setText("username");
+
+        userID.setEditable(false);
+        userID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userIDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout schedPanelLayout = new javax.swing.GroupLayout(schedPanel);
         schedPanel.setLayout(schedPanelLayout);
         schedPanelLayout.setHorizontalGroup(
             schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(refreshBtn2)
+                .addGap(19, 19, 19))
             .addGroup(schedPanelLayout.createSequentialGroup()
                 .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(schedPanelLayout.createSequentialGroup()
                         .addGap(226, 226, 226)
-                        .addComponent(editAppLabel)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(schedPanelLayout.createSequentialGroup()
-                .addGap(265, 265, 265)
-                .addComponent(jButton1)
+                        .addComponent(editAppLabel))
+                    .addGroup(schedPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(27, 27, 27)
+                        .addComponent(cancelBtn)
+                        .addGap(106, 106, 106))))
+            .addGroup(schedPanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(schedPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(schedPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(refreshBtn1)
+                        .addGap(15, 15, 15))))
         );
         schedPanelLayout.setVerticalGroup(
             schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(schedPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(editAppLabel)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(refreshBtn1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(jButton1)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(refreshBtn2)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelBtn)
+                    .addComponent(jButton1)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,7 +300,9 @@ public class EditApp extends javax.swing.JFrame {
                 .addComponent(pawPatLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(schedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -215,8 +316,8 @@ public class EditApp extends javax.swing.JFrame {
     }//GEN-LAST:event_schedNservicesLabelMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int row =jTable2.getSelectedRow();
-        String cell = jTable2.getModel().getValueAt(row,0).toString();
+        int row =acceptedTable.getSelectedRow();
+        String cell = acceptedTable.getModel().getValueAt(row,0).toString();
         String sql = "DELETE FROM appointments where id = " + cell;
         try{
             PreparedStatement pst = con.prepareStatement(sql);
@@ -227,11 +328,40 @@ public class EditApp extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void appointmentsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsLabelMouseClicked
-       String action = "SELECT * FROM appointments";
+//       String action = "SELECT * FROM appointments";
+//        try{
+//            PreparedStatement pst = con.prepareStatement(action);
+//            ResultSet rs = pst.executeQuery();
+//            DefaultTableModel table = (DefaultTableModel) acceptedTable.getModel();
+//            table.setRowCount(0);
+//            while(rs.next()){
+//                table.addRow(new String[]{
+//                    rs.getString(1),
+//                    rs.getString(3),
+//                    rs.getString(4),
+//                    rs.getString(5),
+//                    rs.getString(6),
+//                    rs.getString(7),
+//                    rs.getString(8),
+//                    rs.getString(9)
+//                   } );
+//        }
+//         
+//        }catch (Exception e){
+//        }
+        dispose();
+        EditApp myapp = new EditApp();
+        myapp.setVisible(true);
+        
+    }//GEN-LAST:event_appointmentsLabelMouseClicked
+
+    private void refreshBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtn1ActionPerformed
+        // TODO add your handling code here:
+               String action = "SELECT * FROM appointments where status='accepted'";
         try{
             PreparedStatement pst = con.prepareStatement(action);
             ResultSet rs = pst.executeQuery();
-            DefaultTableModel table = (DefaultTableModel) jTable2.getModel();
+            DefaultTableModel table = (DefaultTableModel) acceptedTable.getModel();
             table.setRowCount(0);
             while(rs.next()){
                 table.addRow(new String[]{
@@ -248,7 +378,38 @@ public class EditApp extends javax.swing.JFrame {
          
         }catch (Exception e){
         }
-    }//GEN-LAST:event_appointmentsLabelMouseClicked
+    }//GEN-LAST:event_refreshBtn1ActionPerformed
+
+    private void refreshBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtn2ActionPerformed
+        // TODO add your handling code here:
+//        String username = userID.getText();
+        String action = "SELECT * FROM appointments where status='pending' where username='"+userID.getText().toString()+"' ";
+        try{
+            PreparedStatement pst = con.prepareStatement(action);
+            ResultSet rs = pst.executeQuery();
+            DefaultTableModel table = (DefaultTableModel) pendingTable.getModel();
+            table.setRowCount(0);
+            while(rs.next()){
+                table.addRow(new String[]{
+                    rs.getString(1),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getString(7),
+                    rs.getString(8),
+                    rs.getString(9)
+                   } );
+        }
+         
+        }catch (Exception e){
+        }
+    }//GEN-LAST:event_refreshBtn2ActionPerformed
+
+    private void userIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userIDActionPerformed
+        // TODO add your handling code here:
+        username(userID.getText().toString());
+    }//GEN-LAST:event_userIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,17 +450,28 @@ public class EditApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable acceptedTable;
     private javax.swing.JLabel appointmentsLabel;
     private javax.swing.JLabel bookingLabel;
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JLabel editAppLabel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel pawPatLabel;
+    private javax.swing.JTable pendingTable;
+    private javax.swing.JButton refreshBtn1;
+    private javax.swing.JButton refreshBtn2;
     private javax.swing.JLabel schedNservicesLabel;
     private javax.swing.JPanel schedPanel;
+    private javax.swing.JTextField userID;
     // End of variables declaration//GEN-END:variables
 }

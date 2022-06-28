@@ -377,7 +377,6 @@ public class Booking extends javax.swing.JFrame {
 
     private void bookingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingLabelMouseClicked
 
-//        String action = "SELECT * FROM `shop_schedule` WHERE `shop_schedule`.`status` = \"available\"";
          try{
 
                 Class.forName("com.mysql.cj.jdbc.Driver");

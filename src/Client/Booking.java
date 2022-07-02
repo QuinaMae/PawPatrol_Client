@@ -13,9 +13,6 @@ import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
-
-
-
 /**
  *
  * @author Vanz
@@ -25,7 +22,7 @@ public class Booking extends javax.swing.JFrame {
     private String specie;
     private String serv;
     
-    int total=0;
+    
     
     String dataConn = "jdbc:mysql://localhost/truenadis";
     String username= "root";
@@ -45,6 +42,30 @@ public class Booking extends javax.swing.JFrame {
             con= DriverManager.getConnection(dataConn,username,password);
         }catch(Exception e){
         }
+        try{
+
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection(dataConn, username, password);
+                ps = con.prepareStatement("SELECT * FROM `shop_schedule` WHERE `shop_schedule`.`status` = 'available'");
+                rs = ps.executeQuery();
+                 while(rs.next()){
+                     String date = rs.getString("date");
+                     dateCbBox.addItem(date);
+                   }       
+            }catch(Exception e){}
+        
+            String action1 = "SELECT * FROM `shop_schedule` WHERE `shop_schedule`.`status` = \"available\"";
+            try{
+                 PreparedStatement pst = con.prepareStatement(action1);
+                 ResultSet rs =pst.executeQuery();
+                 while(rs.next()){
+                     String date = rs.getString("time_in");
+                     timeCbBox.addItem(date);
+
+                 }
+            }catch(Exception e){
+            }
+        
     }
  
     /**
@@ -67,7 +88,6 @@ public class Booking extends javax.swing.JFrame {
         menuPanel = new javax.swing.JPanel();
         schedNservicesLabel = new javax.swing.JLabel();
         bookingLabel = new javax.swing.JLabel();
-        appointmentsLabel = new javax.swing.JLabel();
         sampolNav = new javax.swing.JLabel();
         schedPanel = new javax.swing.JPanel();
         appLabel = new javax.swing.JLabel();
@@ -128,18 +148,9 @@ public class Booking extends javax.swing.JFrame {
             }
         });
 
-        appointmentsLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
-        appointmentsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        appointmentsLabel.setText("My Appointments");
-        appointmentsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                appointmentsLabelMouseClicked(evt);
-            }
-        });
-
         sampolNav.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
         sampolNav.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sampolNav.setText("Sampol");
+        sampolNav.setText("My Appointments");
         sampolNav.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sampolNavMouseClicked(evt);
@@ -153,7 +164,6 @@ public class Booking extends javax.swing.JFrame {
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(appointmentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bookingLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(schedNservicesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sampolNav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -166,8 +176,6 @@ public class Booking extends javax.swing.JFrame {
                 .addComponent(bookingLabel)
                 .addGap(18, 18, 18)
                 .addComponent(schedNservicesLabel)
-                .addGap(18, 18, 18)
-                .addComponent(appointmentsLabel)
                 .addGap(18, 18, 18)
                 .addComponent(sampolNav)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -266,9 +274,8 @@ public class Booking extends javax.swing.JFrame {
                                 .addGap(29, 29, 29))))
                     .addGroup(schedPanelLayout.createSequentialGroup()
                         .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(servLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(servCb, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(servLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(servCb, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(schedPanelLayout.createSequentialGroup()
                                 .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(petNameTf, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,36 +373,16 @@ public class Booking extends javax.swing.JFrame {
     }
    
     private void schedNservicesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_schedNservicesLabelMouseClicked
-        
-    
+            
+        dispose();
+        SchedandServs s = new SchedandServs();
+        //s.usernameInput.setText(userID.getText());
+        s.setVisible(true);
     }//GEN-LAST:event_schedNservicesLabelMouseClicked
 
     private void bookingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingLabelMouseClicked
 
-         try{
-
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection(dataConn, username, password);
-                ps = con.prepareStatement("SELECT * FROM `shop_schedule` WHERE `shop_schedule`.`status` = 'available'");
-                rs = ps.executeQuery();
-                 while(rs.next()){
-                     String date = rs.getString("date");
-                     dateCbBox.addItem(date);
-                   }       
-            }catch(Exception e){}
-        
-            String action1 = "SELECT * FROM `shop_schedule` WHERE `shop_schedule`.`status` = \"available\"";
-            try{
-                 PreparedStatement pst = con.prepareStatement(action1);
-                 ResultSet rs =pst.executeQuery();
-                 while(rs.next()){
-                     String date = rs.getString("time_in");
-                     timeCbBox.addItem(date);
-
-                 }
-            }catch(Exception e){
-            }
-        
+         
     }//GEN-LAST:event_bookingLabelMouseClicked
 
     private void submitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBTNActionPerformed
@@ -434,25 +421,12 @@ public class Booking extends javax.swing.JFrame {
     private void userIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userIDActionPerformed
         try {
             // TODO add your handling code here:
-           
-
-
+          
         } catch (Exception ex) {
             Logger.getLogger(Booking.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_userIDActionPerformed
-
-    private void appointmentsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsLabelMouseClicked
-        // TODO add your handling code here:
-        dispose();
-        
-        EditApp editApp = new EditApp();
-        editApp.usernameInput.setText(userID.getText());
-        editApp.setVisible(true);
-        
-        
-    }//GEN-LAST:event_appointmentsLabelMouseClicked
 
     private void sampolNavMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sampolNavMouseClicked
         // TODO add your handling code here:
@@ -505,7 +479,6 @@ public class Booking extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> SpecieCb;
     private javax.swing.JLabel appLabel;
-    private javax.swing.JLabel appointmentsLabel;
     private javax.swing.JLabel bookingLabel;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

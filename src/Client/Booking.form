@@ -108,7 +108,6 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="appointmentsLabel" alignment="0" max="32767" attributes="0"/>
                       <Component id="bookingLabel" alignment="1" max="32767" attributes="0"/>
                       <Component id="schedNservicesLabel" alignment="1" max="32767" attributes="0"/>
                       <Component id="sampolNav" alignment="0" max="32767" attributes="0"/>
@@ -124,8 +123,6 @@
                   <Component id="bookingLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="schedNservicesLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="appointmentsLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="sampolNav" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -158,25 +155,13 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bookingLabelMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="appointmentsLabel">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="HK Grotesk" size="14" style="1"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="My Appointments"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="appointmentsLabelMouseClicked"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="sampolNav">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="HK Grotesk" size="14" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Sampol"/>
+            <Property name="text" type="java.lang.String" value="My Appointments"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sampolNavMouseClicked"/>
@@ -234,10 +219,8 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                  <Component id="servLabel" min="-2" pref="123" max="-2" attributes="0"/>
-                                  <Component id="servCb" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="servLabel" min="-2" pref="123" max="-2" attributes="0"/>
+                              <Component id="servCb" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="petNameTf" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>

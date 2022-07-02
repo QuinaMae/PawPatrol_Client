@@ -31,6 +31,35 @@ public class SchedandServs extends javax.swing.JFrame {
             con= DriverManager.getConnection(dataConn,username,password);
         }catch(Exception e){
         }
+        String act= "SELECT * FROM shop_schedule";
+        try{
+            PreparedStatement pst = con.prepareStatement(act);
+            ResultSet rs =pst.executeQuery();
+            DefaultTableModel model = (DefaultTableModel)schedTable.getModel();
+            model.setRowCount(0);
+            while(rs.next()){
+                model.addRow(new String[]{
+                    rs.getString(2),
+                    rs.getString(3),rs.getString(4)} );
+                
+            }
+        }catch(Exception e){
+            
+        }
+        String action = "SELECT * FROM shop_services";
+        try{
+            PreparedStatement pst = con.prepareStatement(action);
+            ResultSet rs = pst.executeQuery();
+            DefaultTableModel table = (DefaultTableModel) servTable.getModel();
+            table.setRowCount(0);
+            while(rs.next()){
+                table.addRow(new String[]{
+                    rs.getString(2),
+                    rs.getString(3),rs.getString(4)} );
+        }
+         
+        }catch (Exception e){
+        }
     }
  
     /**
@@ -89,6 +118,11 @@ public class SchedandServs extends javax.swing.JFrame {
         bookingLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
         bookingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bookingLabel.setText("Book Appointment");
+        bookingLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bookingLabelMouseClicked(evt);
+            }
+        });
 
         appointmentsLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
         appointmentsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -249,41 +283,20 @@ public class SchedandServs extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void schedNservicesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_schedNservicesLabelMouseClicked
-        String act= "SELECT * FROM shop_schedule";
-        try{
-            PreparedStatement pst = con.prepareStatement(act);
-            ResultSet rs =pst.executeQuery();
-            DefaultTableModel model = (DefaultTableModel)schedTable.getModel();
-            model.setRowCount(0);
-            while(rs.next()){
-                model.addRow(new String[]{
-                    rs.getString(2),
-                    rs.getString(3),rs.getString(4)} );
-                
-            }
-        }catch(Exception e){
-            
-        }
-        String action = "SELECT * FROM shop_services";
-        try{
-            PreparedStatement pst = con.prepareStatement(action);
-            ResultSet rs = pst.executeQuery();
-            DefaultTableModel table = (DefaultTableModel) servTable.getModel();
-            table.setRowCount(0);
-            while(rs.next()){
-                table.addRow(new String[]{
-                    rs.getString(2),
-                    rs.getString(3),rs.getString(4)} );
-        }
-         
-        }catch (Exception e){
-        }
+        
     
     }//GEN-LAST:event_schedNservicesLabelMouseClicked
 
     private void servTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_servTableMouseClicked
          
     }//GEN-LAST:event_servTableMouseClicked
+
+    private void bookingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingLabelMouseClicked
+        dispose();
+        Booking b = new Booking();
+        //s.usernameInput.setText(userID.getText());
+        b.setVisible(true);
+    }//GEN-LAST:event_bookingLabelMouseClicked
 
     /**
      * @param args the command line arguments

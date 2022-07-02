@@ -27,7 +27,7 @@ public class Booking extends javax.swing.JFrame {
     
     int total=0;
     
-    String dataConn = "jdbc:mysql://localhost/teamhatdog";
+    String dataConn = "jdbc:mysql://localhost/truenadis";
     String username= "root";
     String password= "";
     Connection con;
@@ -38,7 +38,7 @@ public class Booking extends javax.swing.JFrame {
         
         this.buttonGroup1 = new ButtonGroup();
         initComponents();
-        String dataConn = "jdbc:mysql://localhost/teamhatdog";
+        String dataConn = "jdbc:mysql://localhost/truenadis";
         String username= "root";
         String password= "";
         try{
@@ -82,10 +82,8 @@ public class Booking extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        billLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        totalTf = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         userID = new javax.swing.JTextField();
         genderCb = new javax.swing.JComboBox<>();
@@ -215,17 +213,9 @@ public class Booking extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("MY PET");
 
-        billLabel.setText("Bill");
-
         jLabel5.setText("Gender");
 
         jLabel6.setText("Species");
-
-        totalTf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                totalTfActionPerformed(evt);
-            }
-        });
 
         jLabel7.setText("username");
 
@@ -276,14 +266,9 @@ public class Booking extends javax.swing.JFrame {
                                 .addGap(29, 29, 29))))
                     .addGroup(schedPanelLayout.createSequentialGroup()
                         .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(schedPanelLayout.createSequentialGroup()
-                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(servLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(servCb, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(207, 207, 207)
-                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(billLabel)
-                                    .addComponent(totalTf, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(servLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(servCb, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(schedPanelLayout.createSequentialGroup()
                                 .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(petNameTf, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -339,13 +324,9 @@ public class Booking extends javax.swing.JFrame {
                     .addComponent(dateCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(timeCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(billLabel)
-                    .addComponent(servLabel))
+                .addComponent(servLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(servCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(totalTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(servCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
                 .addComponent(submitBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -450,10 +431,6 @@ public class Booking extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_timeCbBoxActionPerformed
 
-    private void totalTfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalTfActionPerformed
-        
-    }//GEN-LAST:event_totalTfActionPerformed
-
     private void userIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userIDActionPerformed
         try {
             // TODO add your handling code here:
@@ -529,7 +506,6 @@ public class Booking extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> SpecieCb;
     private javax.swing.JLabel appLabel;
     private javax.swing.JLabel appointmentsLabel;
-    private javax.swing.JLabel billLabel;
     private javax.swing.JLabel bookingLabel;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -559,7 +535,6 @@ public class Booking extends javax.swing.JFrame {
     private javax.swing.JLabel servLabel;
     private javax.swing.JButton submitBTN;
     private javax.swing.JComboBox<String> timeCbBox;
-    private javax.swing.JTextField totalTf;
     public javax.swing.JTextField userID;
     // End of variables declaration//GEN-END:variables
 }

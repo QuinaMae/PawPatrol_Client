@@ -234,16 +234,9 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="servLabel" min="-2" pref="123" max="-2" attributes="0"/>
-                                      <Component id="servCb" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="207" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="billLabel" min="-2" max="-2" attributes="0"/>
-                                      <Component id="totalTf" min="-2" pref="106" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                  <Component id="servLabel" min="-2" pref="123" max="-2" attributes="0"/>
+                                  <Component id="servCb" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -319,15 +312,9 @@
                       <Component id="timeCbBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="billLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="servLabel" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="servLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="servCb" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="totalTf" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="servCb" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                   <Component id="submitBTN" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -424,11 +411,6 @@
             <Property name="text" type="java.lang.String" value="MY PET"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="billLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Bill"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="text" type="java.lang.String" value="Gender"/>
@@ -438,11 +420,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Species"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="totalTf">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="totalTfActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>

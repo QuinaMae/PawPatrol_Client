@@ -18,23 +18,23 @@ import net.proteanit.sql.DbUtils;
  */
 public class sampol extends javax.swing.JFrame {
     Connection con;
+    
+        String dataConn = "jdbc:mysql://localhost/teamhatdog";
+        String username= "root";
+        String password= "";
+    
+        PreparedStatement ps;
+        ResultSet rs;
     /*
      * Creates new form sampol
      */
     public sampol() {
         initComponents();
-        String dataConn = "jdbc:mysql://localhost/truenadis"
-        String username= "root";
-        String password= "";
-    
-    PreparedStatement ps;
-    ResultSet rs;
     try{
             con= DriverManager.getConnection(dataConn,username,password);
         }catch(Exception e){
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +50,12 @@ public class sampol extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        menuPanel = new javax.swing.JPanel();
+        schedNservicesLabel = new javax.swing.JLabel();
+        bookingLabel = new javax.swing.JLabel();
+        appointmentsLabel = new javax.swing.JLabel();
+        usernameInput = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -87,6 +93,61 @@ public class sampol extends javax.swing.JFrame {
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(jTable1);
 
+        menuPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        schedNservicesLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
+        schedNservicesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        schedNservicesLabel.setText("Schedule and Services");
+        schedNservicesLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                schedNservicesLabelMouseClicked(evt);
+            }
+        });
+
+        bookingLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
+        bookingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bookingLabel.setText("Book Appointment");
+        bookingLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bookingLabelMouseClicked(evt);
+            }
+        });
+
+        appointmentsLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
+        appointmentsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        appointmentsLabel.setText("My Appointments");
+        appointmentsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                appointmentsLabelMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
+        menuPanel.setLayout(menuPanelLayout);
+        menuPanelLayout.setHorizontalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(appointmentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bookingLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(schedNservicesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        menuPanelLayout.setVerticalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(bookingLabel)
+                .addGap(18, 18, 18)
+                .addComponent(schedNservicesLabel)
+                .addGap(18, 18, 18)
+                .addComponent(appointmentsLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel2.setText("Username");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,26 +155,39 @@ public class sampol extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(122, 122, 122)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(118, 118, 118))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(10, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)))
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
+                .addGap(69, 69, 69)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -121,7 +195,7 @@ public class sampol extends javax.swing.JFrame {
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         String tf=jTextField1.getText();
-        String action = " SELECT * FROM appointments WHERE pet_name LIKE '%"+tf+"%' ";
+        String action = " SELECT * FROM appointments WHERE pet_name LIKE '%"+tf+"%' AND username= '"+usernameInput.getText().toString()+"' ";
         try{
         PreparedStatement pst = con.prepareStatement(action);
          ResultSet rs = pst.executeQuery();
@@ -138,6 +212,26 @@ public class sampol extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void schedNservicesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_schedNservicesLabelMouseClicked
+
+    }//GEN-LAST:event_schedNservicesLabelMouseClicked
+
+    private void bookingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingLabelMouseClicked
+        dispose();
+        Booking bk = new Booking();
+        bk.setVisible(true);
+    }//GEN-LAST:event_bookingLabelMouseClicked
+
+    private void appointmentsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsLabelMouseClicked
+        // TODO add your handling code here:
+        dispose();
+        Booking bk = new Booking();
+        EditApp editApp = new EditApp();
+//        editApp.usernameInput.setText(bk.userID.getText());
+        editApp.setVisible(true);
+
+    }//GEN-LAST:event_appointmentsLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -175,11 +269,17 @@ public class sampol extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel appointmentsLabel;
+    private javax.swing.JLabel bookingLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel menuPanel;
+    private javax.swing.JLabel schedNservicesLabel;
+    public javax.swing.JTextField usernameInput;
     // End of variables declaration//GEN-END:variables
 }

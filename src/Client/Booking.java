@@ -35,6 +35,7 @@ public class Booking extends javax.swing.JFrame {
     ResultSet rs;
     
     public Booking() {
+        
         this.buttonGroup1 = new ButtonGroup();
         initComponents();
         String dataConn = "jdbc:mysql://localhost/teamhatdog";
@@ -67,6 +68,7 @@ public class Booking extends javax.swing.JFrame {
         schedNservicesLabel = new javax.swing.JLabel();
         bookingLabel = new javax.swing.JLabel();
         appointmentsLabel = new javax.swing.JLabel();
+        sampolNav = new javax.swing.JLabel();
         schedPanel = new javax.swing.JPanel();
         appLabel = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
@@ -137,6 +139,15 @@ public class Booking extends javax.swing.JFrame {
             }
         });
 
+        sampolNav.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
+        sampolNav.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sampolNav.setText("Sampol");
+        sampolNav.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sampolNavMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -146,7 +157,8 @@ public class Booking extends javax.swing.JFrame {
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(appointmentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bookingLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(schedNservicesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(schedNservicesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sampolNav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         menuPanelLayout.setVerticalGroup(
@@ -158,6 +170,8 @@ public class Booking extends javax.swing.JFrame {
                 .addComponent(schedNservicesLabel)
                 .addGap(18, 18, 18)
                 .addComponent(appointmentsLabel)
+                .addGap(18, 18, 18)
+                .addComponent(sampolNav)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -455,9 +469,23 @@ public class Booking extends javax.swing.JFrame {
     private void appointmentsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsLabelMouseClicked
         // TODO add your handling code here:
         dispose();
-        EditApp myapp = new EditApp();
-        myapp.setVisible(true);
+        
+        EditApp editApp = new EditApp();
+        editApp.usernameInput.setText(userID.getText());
+        editApp.setVisible(true);
+        
+        
     }//GEN-LAST:event_appointmentsLabelMouseClicked
+
+    private void sampolNavMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sampolNavMouseClicked
+        // TODO add your handling code here:
+        
+        dispose();
+        sampol s = new sampol();
+        s.usernameInput.setText(userID.getText());
+        s.setVisible(true);
+        
+    }//GEN-LAST:event_sampolNavMouseClicked
 
     /**
      * @param args the command line arguments
@@ -524,6 +552,7 @@ public class Booking extends javax.swing.JFrame {
     private javax.swing.JLabel pawPatLabel;
     private javax.swing.JTextField petAgeTf;
     private javax.swing.JTextField petNameTf;
+    private javax.swing.JLabel sampolNav;
     private javax.swing.JLabel schedNservicesLabel;
     private javax.swing.JPanel schedPanel;
     private javax.swing.JComboBox<String> servCb;
@@ -531,6 +560,6 @@ public class Booking extends javax.swing.JFrame {
     private javax.swing.JButton submitBTN;
     private javax.swing.JComboBox<String> timeCbBox;
     private javax.swing.JTextField totalTf;
-    private javax.swing.JTextField userID;
+    public javax.swing.JTextField userID;
     // End of variables declaration//GEN-END:variables
 }

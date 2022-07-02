@@ -137,17 +137,7 @@ public class Login extends javax.swing.JFrame {
             bk.setVisible(true);
             this.setVisible(true);
             this.setVisible(false);
-            
-//            EditApp ea = new EditApp();
-//            ea.setVisible(true);
-//            this.setVisible(true);
-//            this.setVisible(false);
-            
-            
-            
-//            this.setVisible(false);
             bk.username(user);
-//            ea.username(user);
             
             if(rs.next()){
                 dispose();

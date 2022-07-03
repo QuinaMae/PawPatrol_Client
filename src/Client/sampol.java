@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
@@ -49,18 +50,21 @@ public class sampol extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         pawPatLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         menuPanel = new javax.swing.JPanel();
         schedNservicesLabel = new javax.swing.JLabel();
         bookingLabel = new javax.swing.JLabel();
-        appointmentsLabel = new javax.swing.JLabel();
+        myAppointments = new javax.swing.JLabel();
+        logoutbt = new javax.swing.JLabel();
+        pawPatLabel1 = new javax.swing.JLabel();
+        mainPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         usernameInput = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        pawPatLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -72,22 +76,89 @@ public class sampol extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cancel Appointment");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField1KeyReleased(evt);
+        menuPanel.setBackground(new java.awt.Color(9, 64, 103));
+
+        schedNservicesLabel.setBackground(new java.awt.Color(255, 255, 254));
+        schedNservicesLabel.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        schedNservicesLabel.setForeground(new java.awt.Color(255, 255, 254));
+        schedNservicesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        schedNservicesLabel.setText("Schedule and Services");
+        schedNservicesLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                schedNservicesLabelMouseClicked(evt);
             }
         });
 
-        jLabel1.setText("Search appointment");
+        bookingLabel.setBackground(new java.awt.Color(255, 255, 254));
+        bookingLabel.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        bookingLabel.setForeground(new java.awt.Color(255, 255, 254));
+        bookingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bookingLabel.setText("Book Appointment");
+        bookingLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bookingLabelMouseClicked(evt);
+            }
+        });
 
+        myAppointments.setBackground(new java.awt.Color(255, 255, 254));
+        myAppointments.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        myAppointments.setForeground(new java.awt.Color(255, 255, 254));
+        myAppointments.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        myAppointments.setText("My Appointments");
+        myAppointments.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                myAppointmentsMouseClicked(evt);
+            }
+        });
+
+        logoutbt.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        logoutbt.setForeground(new java.awt.Color(255, 255, 254));
+        logoutbt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logoutbt.setText("Log Out");
+        logoutbt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutbtMouseClicked(evt);
+            }
+        });
+
+        pawPatLabel1.setFont(new java.awt.Font("Poppins ExtraBold", 0, 18)); // NOI18N
+        pawPatLabel1.setForeground(new java.awt.Color(255, 255, 254));
+        pawPatLabel1.setText("PawPatrol");
+
+        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
+        menuPanel.setLayout(menuPanelLayout);
+        menuPanelLayout.setHorizontalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(schedNservicesLabel)
+                    .addComponent(bookingLabel)
+                    .addComponent(myAppointments)
+                    .addComponent(logoutbt, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addComponent(pawPatLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        menuPanelLayout.setVerticalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addComponent(pawPatLabel1)
+                .addGap(35, 35, 35)
+                .addComponent(bookingLabel)
+                .addGap(18, 18, 18)
+                .addComponent(schedNservicesLabel)
+                .addGap(18, 18, 18)
+                .addComponent(myAppointments)
+                .addGap(212, 212, 212)
+                .addComponent(logoutbt)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        mainPanel.setBackground(new java.awt.Color(255, 255, 254));
+
+        jTable1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -102,130 +173,103 @@ public class sampol extends javax.swing.JFrame {
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(jTable1);
 
-        menuPanel.setBackground(new java.awt.Color(204, 255, 204));
-
-        schedNservicesLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
-        schedNservicesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        schedNservicesLabel.setText("Schedule and Services");
-        schedNservicesLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                schedNservicesLabelMouseClicked(evt);
+        jTextField1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
             }
         });
 
-        bookingLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
-        bookingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        bookingLabel.setText("Book Appointment");
-        bookingLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bookingLabelMouseClicked(evt);
-            }
-        });
-
-        appointmentsLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
-        appointmentsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        appointmentsLabel.setText("My Appointments");
-        appointmentsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                appointmentsLabelMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
-        menuPanel.setLayout(menuPanelLayout);
-        menuPanelLayout.setHorizontalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(appointmentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bookingLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(schedNservicesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        menuPanelLayout.setVerticalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(bookingLabel)
-                .addGap(18, 18, 18)
-                .addComponent(schedNservicesLabel)
-                .addGap(18, 18, 18)
-                .addComponent(appointmentsLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(95, 108, 123));
+        jLabel1.setText("Search appointment");
 
         usernameInput.setEditable(false);
+        usernameInput.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
 
+        jLabel2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(95, 108, 123));
         jLabel2.setText("Username");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("CANCEL");
+        jButton1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jButton1.setText("CANCEL APPOINTMENT");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        pawPatLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        pawPatLabel1.setText("PawPatrol");
+        jLabel8.setFont(new java.awt.Font("Poppins", 2, 11)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(9, 64, 103));
+        jLabel8.setText("PawPatrol > Schedules and Services");
+
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(175, 175, 175))
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addComponent(jLabel8)
+                .addGap(36, 36, 36)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(43, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(89, 89, 89))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(186, 186, 186)
-                                .addComponent(pawPatLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(308, 308, 308)
-                                .addComponent(jButton1)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGap(0, 0, 0)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pawPatLabel1)
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton1)
-                        .addGap(0, 75, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -254,25 +298,21 @@ public class sampol extends javax.swing.JFrame {
     private void schedNservicesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_schedNservicesLabelMouseClicked
         dispose();
         SchedandServs s = new SchedandServs();
-        //s.usernameInput.setText(userID.getText());
+        s.usernameInput.setText(usernameInput.getText());
         s.setVisible(true);
     }//GEN-LAST:event_schedNservicesLabelMouseClicked
 
     private void bookingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingLabelMouseClicked
         dispose();
         Booking bk = new Booking();
+        bk.usernameInput.setText(usernameInput.getText());
         bk.setVisible(true);
     }//GEN-LAST:event_bookingLabelMouseClicked
 
-    private void appointmentsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsLabelMouseClicked
-        // TODO add your handling code here:
-        dispose();
-        Booking bk = new Booking();
-        EditApp editApp = new EditApp();
-//        editApp.usernameInput.setText(bk.userID.getText());
-        editApp.setVisible(true);
+    private void myAppointmentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myAppointmentsMouseClicked
+        JOptionPane.showMessageDialog(this, "You are already in this display");
 
-    }//GEN-LAST:event_appointmentsLabelMouseClicked
+    }//GEN-LAST:event_myAppointmentsMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //"INSERT INTO `appointments` (`username`, `pet_name`, `pet_specie`, `pet_age`, `pet_gender`, `service`, `date_booked`, `time_booked`, `status`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, 'pending');
@@ -287,6 +327,16 @@ public class sampol extends javax.swing.JFrame {
         }catch(Exception e){
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void logoutbtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutbtMouseClicked
+        JFrame frame = new JFrame("Log Out");
+        if(JOptionPane.showConfirmDialog(frame, "Are you sure you want to log out?", "Client", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+        {
+            dispose();
+            Login login = new Login();
+            login.setVisible(true);
+        }
+    }//GEN-LAST:event_logoutbtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -324,17 +374,20 @@ public class sampol extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel appointmentsLabel;
     private javax.swing.JLabel bookingLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel logoutbt;
+    private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JLabel myAppointments;
     private javax.swing.JLabel pawPatLabel;
     private javax.swing.JLabel pawPatLabel1;
     private javax.swing.JLabel schedNservicesLabel;

@@ -85,12 +85,12 @@ public class Booking extends javax.swing.JFrame {
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
         buttonGroup5 = new javax.swing.ButtonGroup();
-        pawPatLabel = new javax.swing.JLabel();
         menuPanel = new javax.swing.JPanel();
         schedNservicesLabel = new javax.swing.JLabel();
         bookingLabel = new javax.swing.JLabel();
         sampolNav = new javax.swing.JLabel();
         logoutbt = new javax.swing.JLabel();
+        pawPatLabel = new javax.swing.JLabel();
         schedPanel = new javax.swing.JPanel();
         dateLabel = new javax.swing.JLabel();
         servLabel = new javax.swing.JLabel();
@@ -108,8 +108,9 @@ public class Booking extends javax.swing.JFrame {
         genderCb = new javax.swing.JComboBox<>();
         SpecieCb = new javax.swing.JComboBox<>();
         servCb = new javax.swing.JComboBox<>();
-        userID = new javax.swing.JTextField();
+        usernameInput = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,12 +128,10 @@ public class Booking extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booking");
 
-        pawPatLabel.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        pawPatLabel.setText("PawPatrol");
+        menuPanel.setBackground(new java.awt.Color(9, 64, 103));
 
-        menuPanel.setBackground(new java.awt.Color(204, 255, 204));
-
-        schedNservicesLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
+        schedNservicesLabel.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        schedNservicesLabel.setForeground(new java.awt.Color(255, 255, 254));
         schedNservicesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         schedNservicesLabel.setText("Schedule and Services");
         schedNservicesLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -141,7 +140,8 @@ public class Booking extends javax.swing.JFrame {
             }
         });
 
-        bookingLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
+        bookingLabel.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        bookingLabel.setForeground(new java.awt.Color(255, 255, 254));
         bookingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bookingLabel.setText("Book Appointment");
         bookingLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -150,7 +150,8 @@ public class Booking extends javax.swing.JFrame {
             }
         });
 
-        sampolNav.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
+        sampolNav.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        sampolNav.setForeground(new java.awt.Color(255, 255, 254));
         sampolNav.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         sampolNav.setText("My Appointments");
         sampolNav.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -159,7 +160,8 @@ public class Booking extends javax.swing.JFrame {
             }
         });
 
-        logoutbt.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        logoutbt.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        logoutbt.setForeground(new java.awt.Color(255, 255, 254));
         logoutbt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logoutbt.setText("Log Out");
         logoutbt.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -168,23 +170,34 @@ public class Booking extends javax.swing.JFrame {
             }
         });
 
+        pawPatLabel.setFont(new java.awt.Font("Poppins ExtraBold", 0, 18)); // NOI18N
+        pawPatLabel.setForeground(new java.awt.Color(255, 255, 254));
+        pawPatLabel.setText("PawPatrol");
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
+                .addComponent(pawPatLabel)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bookingLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(schedNservicesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sampolNav, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logoutbt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(schedNservicesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sampolNav, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bookingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(logoutbt))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addComponent(pawPatLabel)
+                .addGap(18, 18, 18)
                 .addComponent(bookingLabel)
                 .addGap(18, 18, 18)
                 .addComponent(schedNservicesLabel)
@@ -192,202 +205,142 @@ public class Booking extends javax.swing.JFrame {
                 .addComponent(sampolNav)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutbt)
-                .addGap(36, 36, 36))
+                .addContainerGap())
         );
 
-        dateLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        schedPanel.setBackground(new java.awt.Color(255, 255, 254));
+        schedPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dateLabel.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         dateLabel.setText("Select a Date");
+        schedPanel.add(dateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
-        servLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        servLabel.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         servLabel.setText("Select  Service");
+        schedPanel.add(servLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 123, -1));
 
+        dateCbBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         dateCbBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dateCbBoxActionPerformed(evt);
             }
         });
+        schedPanel.add(dateCbBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 244, -1));
 
+        submitBTN.setBackground(new java.awt.Color(61, 169, 252));
+        submitBTN.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        submitBTN.setForeground(new java.awt.Color(255, 255, 254));
         submitBTN.setText("SUBMIT");
         submitBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitBTNActionPerformed(evt);
             }
         });
+        schedPanel.add(submitBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 460, 86, 34));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel1.setText("Select a Time");
+        schedPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, -1, -1));
 
+        timeCbBox.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         timeCbBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 timeCbBoxActionPerformed(evt);
             }
         });
+        schedPanel.add(timeCbBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 244, -1));
 
+        petNameTf.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        schedPanel.add(petNameTf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 148, -1));
+
+        petAgeTf.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        schedPanel.add(petAgeTf, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 77, -1));
+
+        jLabel2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel2.setText("Pet's Name");
+        schedPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel3.setText("Age");
+        schedPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("MY PET");
+        schedPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel5.setText("Gender");
+        schedPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
+        jLabel6.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel6.setText("Species");
+        schedPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1));
 
+        genderCb.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         genderCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Female", "Male" }));
+        schedPanel.add(genderCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
+        SpecieCb.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         SpecieCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cat", "Dog" }));
+        schedPanel.add(SpecieCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, -1, -1));
 
+        servCb.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         servCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pet Sitting", "Pet Walking", "Pet Grooming", "Pet Training", "Pet Hotel" }));
+        schedPanel.add(servCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 116, -1));
 
-        userID.setEditable(false);
-        userID.addActionListener(new java.awt.event.ActionListener() {
+        usernameInput.setEditable(false);
+        usernameInput.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        usernameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userIDActionPerformed(evt);
+                usernameInputActionPerformed(evt);
             }
         });
+        schedPanel.add(usernameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 120, 20));
 
-        jLabel7.setText("username:");
+        jLabel7.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel7.setText("Username");
+        schedPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
-        javax.swing.GroupLayout schedPanelLayout = new javax.swing.GroupLayout(schedPanel);
-        schedPanel.setLayout(schedPanelLayout);
-        schedPanelLayout.setHorizontalGroup(
-            schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(schedPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(submitBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63))
-                    .addGroup(schedPanelLayout.createSequentialGroup()
-                        .addComponent(dateCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(timeCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
-                        .addComponent(dateLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(176, 176, 176))
-                    .addGroup(schedPanelLayout.createSequentialGroup()
-                        .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(servLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(servCb, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(schedPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(113, 113, 113)
-                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(SpecieCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(schedPanelLayout.createSequentialGroup()
-                        .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(genderCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addGroup(schedPanelLayout.createSequentialGroup()
-                                .addComponent(petNameTf, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(petAgeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(schedPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        schedPanelLayout.setVerticalGroup(
-            schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(schedPanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(petNameTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(petAgeTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(genderCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SpecieCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateLabel)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(timeCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(servLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(servCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(submitBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
+        jLabel8.setFont(new java.awt.Font("Poppins", 2, 11)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(9, 64, 103));
+        jLabel8.setText("PawPatrol > Appointment");
+        schedPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(schedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(21, 21, 21))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(pawPatLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(schedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pawPatLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(schedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(schedPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
     void username(String user){
-        userID.setText(user);
+        usernameInput.setText(user);
     }
    
     private void schedNservicesLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_schedNservicesLabelMouseClicked
-            
         dispose();
         SchedandServs s = new SchedandServs();
-        //s.usernameInput.setText(userID.getText());
+        s.usernameInput.setText(usernameInput.getText());
         s.setVisible(true);
     }//GEN-LAST:event_schedNservicesLabelMouseClicked
 
     private void bookingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingLabelMouseClicked
-
-         
+        JOptionPane.showMessageDialog(this, "You are already in this display");
     }//GEN-LAST:event_bookingLabelMouseClicked
 
     private void submitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBTNActionPerformed
-        if (userID.getText().isEmpty()){
+        if (usernameInput.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Missing Component!"); 
             } else {
             try{        
@@ -396,7 +349,7 @@ public class Booking extends javax.swing.JFrame {
                 con = DriverManager.getConnection(dataConn, username, password);
                 PreparedStatement pst = con.prepareStatement(sub);
 
-                pst.setString(1,userID.getText());
+                pst.setString(1,usernameInput.getText());
                 pst.setString(2,petNameTf.getText()); // gets pet name
                 pst.setObject(3,SpecieCb.getSelectedItem()); // gets specie
                 pst.setString(4,petAgeTf.getText()); // gets pet age
@@ -419,7 +372,7 @@ public class Booking extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_timeCbBoxActionPerformed
 
-    private void userIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userIDActionPerformed
+    private void usernameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameInputActionPerformed
         try {
             // TODO add your handling code here:
           
@@ -427,14 +380,13 @@ public class Booking extends javax.swing.JFrame {
             Logger.getLogger(Booking.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_userIDActionPerformed
+    }//GEN-LAST:event_usernameInputActionPerformed
 
     private void sampolNavMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sampolNavMouseClicked
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:    
         dispose();
         sampol s = new sampol();
-        s.usernameInput.setText(userID.getText());
+        s.usernameInput.setText(usernameInput.getText());
         s.setVisible(true);
         
     }//GEN-LAST:event_sampolNavMouseClicked
@@ -505,6 +457,7 @@ public class Booking extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel logoutbt;
@@ -519,6 +472,6 @@ public class Booking extends javax.swing.JFrame {
     private javax.swing.JLabel servLabel;
     private javax.swing.JButton submitBTN;
     private javax.swing.JComboBox<String> timeCbBox;
-    public javax.swing.JTextField userID;
+    public javax.swing.JTextField usernameInput;
     // End of variables declaration//GEN-END:variables
 }

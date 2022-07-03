@@ -81,7 +81,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="loginLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="usernameInput" min="-2" pref="126" max="-2" attributes="0"/>
+                              <Component id="usernameInputt" min="-2" pref="126" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -97,7 +97,7 @@
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="usernameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="usernameInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="usernameInputt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -120,7 +120,7 @@
             <Property name="text" type="java.lang.String" value="LOG IN"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="usernameInput">
+        <Component class="javax.swing.JTextField" name="usernameInputt">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>

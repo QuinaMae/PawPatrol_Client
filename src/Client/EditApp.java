@@ -50,13 +50,13 @@ public class EditApp extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        pawPatLabel = new javax.swing.JLabel();
         menuPanel = new javax.swing.JPanel();
         schedNservicesLabel = new javax.swing.JLabel();
         bookingLabel = new javax.swing.JLabel();
         appointmentsLabel = new javax.swing.JLabel();
+        pawPatLabel = new javax.swing.JLabel();
+        logoutbt = new javax.swing.JLabel();
         schedPanel = new javax.swing.JPanel();
-        editAppLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         acceptedTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -69,6 +69,7 @@ public class EditApp extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         usernameInput = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -92,12 +93,11 @@ public class EditApp extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pawPatLabel.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        pawPatLabel.setText("PawPatrol");
-
+        menuPanel.setBackground(new java.awt.Color(9, 64, 103));
         menuPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        schedNservicesLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
+        schedNservicesLabel.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        schedNservicesLabel.setForeground(new java.awt.Color(255, 255, 254));
         schedNservicesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         schedNservicesLabel.setText("Schedule and Services");
         schedNservicesLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,11 +106,18 @@ public class EditApp extends javax.swing.JFrame {
             }
         });
 
-        bookingLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
+        bookingLabel.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        bookingLabel.setForeground(new java.awt.Color(255, 255, 254));
         bookingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bookingLabel.setText("Book Appointment");
+        bookingLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bookingLabelMouseClicked(evt);
+            }
+        });
 
-        appointmentsLabel.setFont(new java.awt.Font("HK Grotesk", 1, 14)); // NOI18N
+        appointmentsLabel.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        appointmentsLabel.setForeground(new java.awt.Color(255, 255, 254));
         appointmentsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         appointmentsLabel.setText("My Appointments");
         appointmentsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,36 +126,54 @@ public class EditApp extends javax.swing.JFrame {
             }
         });
 
+        pawPatLabel.setFont(new java.awt.Font("Poppins ExtraBold", 0, 18)); // NOI18N
+        pawPatLabel.setForeground(new java.awt.Color(255, 255, 254));
+        pawPatLabel.setText("PawPatrol");
+
+        logoutbt.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        logoutbt.setForeground(new java.awt.Color(255, 255, 254));
+        logoutbt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logoutbt.setText("Log Out");
+        logoutbt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutbtMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(pawPatLabel)
+                .addGap(79, 79, 79))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(appointmentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bookingLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(schedNservicesLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(logoutbt)
+                    .addComponent(schedNservicesLabel)
+                    .addComponent(appointmentsLabel)
+                    .addComponent(bookingLabel))
                 .addContainerGap())
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addComponent(pawPatLabel)
+                .addGap(31, 31, 31)
                 .addComponent(bookingLabel)
                 .addGap(18, 18, 18)
                 .addComponent(schedNservicesLabel)
                 .addGap(18, 18, 18)
                 .addComponent(appointmentsLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoutbt)
+                .addContainerGap())
         );
 
+        schedPanel.setBackground(new java.awt.Color(255, 255, 254));
         schedPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        editAppLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        editAppLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        editAppLabel.setText("Edit Appointment ");
-
+        acceptedTable.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         acceptedTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -161,6 +186,7 @@ public class EditApp extends javax.swing.JFrame {
         jScrollPane2.setViewportView(acceptedTable);
         acceptedTable.getAccessibleContext().setAccessibleParent(acceptedTable);
 
+        jButton1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jButton1.setText("delete");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,8 +194,10 @@ public class EditApp extends javax.swing.JFrame {
             }
         });
 
+        cancelBtn.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         cancelBtn.setText("request cancellation");
 
+        pendingTable.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         pendingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -181,6 +209,7 @@ public class EditApp extends javax.swing.JFrame {
         pendingTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane3.setViewportView(pendingTable);
 
+        refreshBtn1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         refreshBtn1.setText("refresh");
         refreshBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,6 +217,7 @@ public class EditApp extends javax.swing.JFrame {
             }
         });
 
+        refreshBtn2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         refreshBtn2.setText("refresh");
         refreshBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,88 +225,95 @@ public class EditApp extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel1.setText("Accepted Appointments");
 
+        jLabel2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel2.setText("Pending Appointments");
 
+        jLabel3.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel3.setText("username");
 
         usernameInput.setEditable(false);
+        usernameInput.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         usernameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameInputActionPerformed(evt);
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Poppins", 2, 11)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(9, 64, 103));
+        jLabel8.setText("PawPatrol > My Appointments");
+
         javax.swing.GroupLayout schedPanelLayout = new javax.swing.GroupLayout(schedPanel);
         schedPanel.setLayout(schedPanelLayout);
         schedPanelLayout.setHorizontalGroup(
             schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(refreshBtn2)
-                .addGap(19, 19, 19))
+            .addGroup(schedPanelLayout.createSequentialGroup()
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(schedPanelLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(schedPanelLayout.createSequentialGroup()
+                                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(schedPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(schedPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(refreshBtn2))))
+                    .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(schedPanelLayout.createSequentialGroup()
+                            .addGap(59, 59, 59)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, schedPanelLayout.createSequentialGroup()
+                            .addGap(50, 50, 50)
+                            .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(refreshBtn1)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(schedPanelLayout.createSequentialGroup()
                 .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(schedPanelLayout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(editAppLabel))
-                    .addGroup(schedPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedPanelLayout.createSequentialGroup()
+                        .addGap(255, 255, 255)
                         .addComponent(jButton1)
                         .addGap(27, 27, 27)
-                        .addComponent(cancelBtn)
-                        .addGap(106, 106, 106))))
-            .addGroup(schedPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cancelBtn))
                     .addGroup(schedPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(schedPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(refreshBtn1)
-                        .addGap(15, 15, 15))))
+                        .addContainerGap()
+                        .addComponent(jLabel8)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         schedPanelLayout.setVerticalGroup(
             schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(schedPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(editAppLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(57, 57, 57)
                 .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(refreshBtn1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(refreshBtn2)
-                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(refreshBtn1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(refreshBtn2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(32, 32, 32)
                 .addGroup(schedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelBtn)
-                    .addComponent(jButton1)))
+                    .addComponent(jButton1))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,25 +321,15 @@ public class EditApp extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(schedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pawPatLabel)
-                .addGap(258, 258, 258))
+                .addGap(0, 0, 0)
+                .addComponent(schedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pawPatLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(schedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -390,6 +417,25 @@ public class EditApp extends javax.swing.JFrame {
 
     }//GEN-LAST:event_usernameInputActionPerformed
 
+    private void logoutbtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutbtMouseClicked
+        JFrame frame = new JFrame("Log Out");
+        if(JOptionPane.showConfirmDialog(frame, "Are you sure you want to log out?", "Client", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+        {
+            dispose();
+            Login login = new Login();
+            login.setVisible(true);
+        }
+    }//GEN-LAST:event_logoutbtMouseClicked
+
+    private void bookingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingLabelMouseClicked
+        // TODO add your handling code here:
+        dispose();
+        Booking bk = new Booking();
+        Login lg = new Login();
+        bk.usernameInput.setText(lg.usernameInputt.getText());
+        bk.setVisible(true);
+    }//GEN-LAST:event_bookingLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -433,17 +479,18 @@ public class EditApp extends javax.swing.JFrame {
     private javax.swing.JLabel appointmentsLabel;
     private javax.swing.JLabel bookingLabel;
     private javax.swing.JButton cancelBtn;
-    private javax.swing.JLabel editAppLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel logoutbt;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel pawPatLabel;
     private javax.swing.JTable pendingTable;

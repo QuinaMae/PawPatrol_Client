@@ -32,7 +32,7 @@ public class Login extends javax.swing.JFrame {
         jTextPane1 = new javax.swing.JTextPane();
         jPanel1 = new javax.swing.JPanel();
         loginLabel = new javax.swing.JLabel();
-        usernameInput = new javax.swing.JTextField();
+        usernameInputt = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         loginBtn = new javax.swing.JButton();
@@ -79,7 +79,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(loginLabel)
-                            .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(usernameInputt, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(198, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -90,7 +90,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usernameLabel)
-                    .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usernameInputt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(passwordLabel)
@@ -125,27 +125,22 @@ public class Login extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/teamhatdog","root", "");
            
-            String username = usernameInput.getText();
+            String username = usernameInputt.getText();
             String password = passwordInput.getText();
             
             Statement st = con.createStatement();
             String sql = "select * from user_profile where username='"+username+"' and pswd='"+password+"' and role='client'";
             ResultSet rs = st.executeQuery(sql);
-            
-            String user = usernameInput.getText().toString();
-            Booking bk = new Booking();
-            bk.setVisible(true);
-            this.setVisible(true);
-            this.setVisible(false);
-            bk.username(user);
+      
             
             if(rs.next()){
                 dispose();
-                Booking booking = new Booking();
-                booking.show();
+                Booking bk = new Booking();
+                bk.usernameInput.setText(usernameInputt.getText());
+                bk.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(this, "Invalid!");
-                usernameInput.setText("");
+                usernameInputt.setText("");
                 passwordInput.setText("");
             }
             
@@ -199,7 +194,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel loginLabel;
     private javax.swing.JPasswordField passwordInput;
     private javax.swing.JLabel passwordLabel;
-    public javax.swing.JTextField usernameInput;
+    public javax.swing.JTextField usernameInputt;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 

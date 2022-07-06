@@ -335,7 +335,7 @@ public class SchedandServs extends javax.swing.JFrame {
     private void appointmentsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsLabelMouseClicked
         // TODO add your handling code here:
         dispose();
-        sampol s = new sampol();
+        MyAppointments s = new MyAppointments();
         s.usernameInput.setText(usernameInput.getText());
         s.setVisible(true);
     }//GEN-LAST:event_appointmentsLabelMouseClicked
